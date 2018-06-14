@@ -4,7 +4,7 @@
         // Conectar al servidor de MongoDB con los valores por defecto
         $manager = new MongoDB\Driver\Manager(); 
         
-        //consultar el primer tweet
+        //consultar el tweet más retwweteado
         $filtro = [ "isRetweet" => ['$eq' => 0]];   //que sea un tweet y no un retweet
         $campos = ['projection' => ['retweets' => 1, 'text' => 1, 'user' => 1],
                    'sort' => ['retweets' => -1],

@@ -7,7 +7,7 @@
         $command = new MongoDB\Driver\Command([
             'aggregate' => 'tweets',
             'pipeline' => [
-                ['$unwind' => $usersMentioned],  //comprobar que sea un array!!! https://docs.mongodb.com/manual/reference/operator/aggregation/unwind/
+                ['$unwind' => '$usersMentioned'],  //comprobar que sea un array!!! https://docs.mongodb.com/manual/reference/operator/aggregation/unwind/
                 ['$group' => ['_id' => '$usersMentioned', 'total'=> ['$sum' => 1]]],
                 ['$sort' => ['total' => -1]],
                 ['$limit' => 3] 
@@ -20,7 +20,7 @@
         if($cursor!=""){             
             foreach ($cursor as $row) {
                 //comprobar si saca el id o el nombre
-                $resultado = $resultado. "<li>@" .$row->_id. "      " .$row->total. "</li>";
+                $resultado = $resultado. "<li>" .$row->_id. "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" .$row->total. " menciones</li>";
             }            
         }
 

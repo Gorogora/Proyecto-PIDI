@@ -350,12 +350,28 @@ desired effect
           <!-- /.info-box -->
         </div>
         <!-- /.col -->
+
+        <!-- Usuario con  más tweets -->
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="info-box">
+            <span class="info-box-icon bg-navy"><i class="fa fa-user"></i></span>
+            <div class="info-box-content">
+              <span class="info-box-text"><b>Usuario con más tweets</b></span>
+              <span class="info-box-text" id="userWithMoreTweets"></span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
       </div>
       <!-- /.row -->
 
       <div class="row">
+        <div class="col-md-2"></div>
+
         <!-- Tweet más retwiteado -->     
-        <div class="col-md-3">
+        <div class="col-md-4">
           <div class="box box-primary collapsed-box">
             <div class="box-header with-border">
               <h3 class="box-title">Tweet más retwitteado</h3>
@@ -377,7 +393,7 @@ desired effect
         <!-- /.col -->
 
         <!-- Usuarios más mencionados -->
-        <div class="col-md-3">
+        <div class="col-md-4">
           <div class="box box-primary collapsed-box">
             <div class="box-header with-border">
               <h3 class="box-title">Usuarios más mencionados</h3>
@@ -401,8 +417,52 @@ desired effect
         </div>
         <!-- /.col -->
 
+        <div class="col-md-2"></div>
+      </div>
+      <!-- /.row -->
 
+      <div class="row">
+        <div class="col-md-6">
+          <!-- idiomas desde los que más tweets se escriben -->
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title">Idiomas en los que más se tweettea</h3>
 
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+              </div>
+            </div>
+            <div class="box-body">
+              <canvas id="pieChartLanguage" style="height:250px"></canvas>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+
+        <div class="col-md-6">
+          <!-- lugar desde los que más tweets se escriben -->
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title">Lugares en los que más se tweettea</h3>
+
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+              </div>
+            </div>
+            <div class="box-body">
+              <canvas id="pieChartPlace" style="height:250px"></canvas>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
       </div>
       <!-- /.row -->
         
@@ -513,6 +573,12 @@ desired effect
 <script src="dist/js/adminlte.min.js"></script>
 <!-- datepicker -->
 <script src="bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+
+ <!-- Chart.js -->
+ <script src="Chart.js/dist/Chart.min.js"></script>
+<!-- jQuery Knob Chart -->
+<script src="bower_components/jquery-knob/dist/jquery.knob.min.js"></script>
+
 
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the

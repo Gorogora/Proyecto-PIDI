@@ -7,8 +7,7 @@
         $command = new MongoDB\Driver\Command([
             'aggregate' => 'tweets',
             'pipeline' => [
-                ['$unwind' => '$hashtags'],  //comprobar que sea un array!!! https://docs.mongodb.com/manual/reference/operator/aggregation/unwind/
-                ['$group' => ['_id' => '$hashtags', 'total'=> ['$sum' => 1]]],
+                ['$group' => ['_id' => '$user', 'total'=> ['$sum' => 1]]],
                 ['$sort' => ['total' => -1]],
                 ['$limit' => 1] 
             ],
@@ -19,11 +18,13 @@
 
         if($cursor!=""){             
             foreach ($cursor as $row) {
-                $resultado = $row->_id;
+                $resultado =  $row->_id. "<br>";
+                $resultado = $resultado. "&nbsp;&nbsp;&nbsp;&nbsp;" .$row->total. " tweets";
             }            
         }
 
         echo $resultado;
+
         
     }
     catch (MongoDB\Driver\Exception\Exception $e) { 
