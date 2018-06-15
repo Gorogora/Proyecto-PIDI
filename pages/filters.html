@@ -261,7 +261,7 @@ desired effect
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">HEADER</li>
         <!-- Optionally, you can add icons to the links -->
-        <li><a href="index.php"><i class="fa fa-area-chart"></i> <span>Estadísticas</span></a></li>
+        <li><a href="../index.php"><i class="fa fa-area-chart"></i> <span>Estadísticas</span></a></li>
         <li class="active"><a href="#"><i class="fa fa-filter"></i> <span>Filtros</span></a></li>
         <!--
         <li class="treeview">
@@ -287,8 +287,7 @@ desired effect
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Page Header
-        <small>Optional description</small>
+        Filtrado de tweets
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
@@ -302,64 +301,120 @@ desired effect
       <!--------------------------
         | Your Page Content Here |
         -------------------------->
-		
-		
+    
 		<!-- Filtros -->
 		<div class="box box-info">
 			<div class="box-header with-border">
         <h3 class="box-title">Filtros</h3>
       </div>	
-			<!-- /.box-header -->
-			<div class="box-body">
-        <!-- Filtrado por palabras en el texto -->
-				<label for="inputPalabras" class="col-sm-2 control-label">Palabras en el texto</label>
-				<div class="col-sm-10">
-					<input type="text" class="form-control" id="inputPalabras" placeholder="Escribe un texto">
-        </div>
-        <br>
+      <!-- /.box-header -->
+      <form role="form" class="form-horizontal">
+			  <div class="box-body">  
 
-        <!-- Filtrado por rango de fechas-->        
-        <label for="inputDateIni" class="col-sm-2 control-label">Fecha inicio:</label>
-        <div class="col-sm-4">
-          <div class="input-group date">
-            <div class="input-group-addon">
-              <i class="fa fa-calendar"></i>
+          <!-- Seleccionar colección sobre la que se quieren aplicar los filtros-->
+          <div class="form-group">
+              <label for="selectColeccion" class="col-sm-2 control-label">Selecciona una colección</label>
+              <div class="col-sm-10">
+                <select class="form-control" id="selectColeccion" name="select_coleccion"></select>
+              </div>
+          </div>
+          <!-- ./form-group -->
+
+          <!-- Filtrado por rango de fechas--> 
+          <div class="form-group">       
+            <label for="inputDateIni" class="col-sm-2 control-label">Fecha inicio:</label>
+            <div class="col-sm-4">
+              <div class="input-group date">
+                <div class="input-group-addon">
+                  <i class="fa fa-calendar"></i>
+                </div>
+                <input type="date" class="form-control" id="inputDateIni" >
+              </div>
+              <!-- /.input group -->
             </div>
-            <input type="date" class="form-control" id="inputDateIni" >
+            <!-- /.col-date-ini -->
           </div>
-          <!-- /.input group -->
-        </div>
-        <!-- /.col-date-ini -->
+          <!-- ./form-group -->
 
-        <label for="inputDateFin" class="col-sm-2 control-label">Fecha fin:</label>
-        <div class="col-sm-4">
-          <div class="input-group date">
-            <div class="input-group-addon">
-              <i class="fa fa-calendar"></i>
+          <div class="form-group">   
+            <label for="inputDateFin" class="col-sm-2 control-label">Fecha fin:</label>
+            <div class="col-sm-4">
+              <div class="input-group date">
+                <div class="input-group-addon">
+                  <i class="fa fa-calendar"></i>
+                </div>
+                <input type="date" class="form-control" id="inputDateFin">
+              </div>
+              <!-- /.input group -->
             </div>
-            <input type="date" class="form-control" id="inputDateFin">
+            <!-- /.col-date-fin -->
           </div>
-          <!-- /.input group -->
-        </div>
-        <!-- /.col-date-fin -->
-        <br>
+          <!-- ./form-group -->
 
-        <!-- Filtrado por nombre de usuario -->
-        <label for="inputUserName" class="col-sm-2 control-label">Usuario</label>
-        <div class="col-sm-10">
-          <div class="input-group">
-            <span class="input-group-addon">@</span>
-            <input type="text" class="form-control" id="inputUserName" placeholder="Username">
+          <!-- Filtrado por nombre de usuario -->
+          <div class="form-group">
+              <label for="inputUserName" class="col-sm-2 control-label">Usuario</label>
+              <div class="col-sm-5">
+                  <select class="form-control" id="inputUserName" name="inputUserName"></select>
+              </div>
           </div>
-        </div>
-        <br>
+          <!-- ./form-group -->
 
-			</div>
-			<!-- /.box-body -->
-			<div class="box-footer">
-          <button type="submit" class="btn btn-info pull-right">Filtrar</button>
-      </div>
-      <!-- /.box-footer -->
+          <!-- Filtrado por palabras en el texto -->
+          <div class"form-group">          
+              <label for="inputPalabras" class="col-sm-2 control-label">Palabras en el texto</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="inputPalabras" placeholder="Escribe un texto">
+              </div>              
+          </div>
+          <!-- ./form-group -->
+
+          <!-- Filtrado por idioma -->
+          <div class"form-group">          
+              <label for="inputLanguage" class="col-sm-2 control-label">Idioma</label>
+              <div class="col-sm-10">
+                  <select class="form-control" id="inputLanguage" name="inputLanguage"></select>
+              </div>              
+          </div>
+          <!-- ./form-group -->
+
+          <!-- Filtrado por localización -->
+          <div class"form-group">          
+              <label for="inputPlace" class="col-sm-2 control-label">País</label>
+              <div class="col-sm-10">
+                  <select class="form-control" id="inputPlace" name="inputPlace"></select>
+              </div>              
+          </div>
+          <!-- ./form-group -->
+
+          <!-- Filtrado por hashtags -->
+          <div class"form-group">          
+              <label for="inputPlace" class="col-sm-2 control-label">País</label>
+              <div class="col-sm-10">
+                  <select class="form-control" id="inputHashtag" name="inputHashtag"></select>
+              </div>              
+          </div>
+          <!-- ./form-group -->
+
+          <!-- Descartar retweets -->
+          <div class"form-group"> 
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" name="checkboxRetweet" id="optionRetweed">
+                Descartar retweet
+              </label>
+            </div>
+          </div>
+          <!-- ./form-group -->
+ 
+        </div>
+        <!-- /.box-body -->
+        <div class="box-footer">
+            <button type="button" class="btn btn-info pull-right" onclick="creaColeccionFiltrada($('#selectColeccion').val());return false;">Filtrar</button>
+        </div>
+        <!-- /.box-footer -->
+      </form>
+      <!-- /.form -->
 		</div>
 		<!-- /.box -->
 
@@ -465,6 +520,11 @@ desired effect
 <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- AdminLTE App -->
 <script src="../dist/js/adminlte.min.js"></script>
+
+<!-- Funciones -->
+<script type="text/javascript" src="../js/funciones.js"></script>
+<!-- Ajax -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the
