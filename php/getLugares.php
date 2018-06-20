@@ -1,35 +1,48 @@
 <?php 
-    $resultado ="";
-    try { 
-        
-        $manager = new MongoDB\Driver\Manager(); 
+    //Llamo al modelo mongodb
+    require_once '../modelo/MongoDB.php';
 
-        $command = new MongoDB\Driver\Command([
-            'aggregate' => 'tweets',
-            'pipeline' => [
-                ['$group' => ['_id' => '$place']],
-                ['$sort' => ['_id' => 1]]
-            ],
-            'cursor' => new stdClass,
-        ]);
-        
-        $cursor = $manager->executeCommand("Twitter", $command);
+    if( $_REQUEST['coleccion']){
 
-        if($cursor!=""){ 
-            foreach ($cursor as $row) {
-                    $resultado = $resultado. '<option value="' .$row->_id. '>' .$row->_id. '</option>';
-            }        
+        $coleccion = $_REQUEST['coleccion'];
+        $resultado ="";
+        try { 
+
+            $mongo = new MongoDB();
+            $cursor = $mongo->getLugares($coleccion);
+            
+            /*
+            $manager = new MongoDB\Driver\Manager(); 
+
+            $command = new MongoDB\Driver\Command([
+                'aggregate' => $coleccion,
+                'pipeline' => [
+                    ['$group' => ['_id' => '$place']],
+                    ['$sort' => ['_id' => 1]]
+                ],
+                'cursor' => new stdClass,
+            ]);
+            
+            $cursor = $manager->executeCommand("Twitter", $command);
+            */
+
+            if($cursor!=""){ 
+                $resultado = '<option value="0">Seleccione un país...</option>';
+                foreach ($cursor as $row) {
+                    $resultado = $resultado. '<option value="' .$row->_id. '">' .$row->_id. '</option>';
+                }        
+            }
+
+            echo $resultado;
+            
         }
-
-        echo $resultado;
-        
+        catch (MongoDB\Driver\Exception\Exception $e) { 
+            $resultado = "<p>";
+            $resultado = $resultado. "Exception:". $e->getMessage() . "<br>"; 
+            $resultado = $resultado. "In file:". $e->getFile().  "<br>"; 
+            $resultado = $resultado. "On line:". $e->getLine(). "<br>"; 
+            $resultado = $resultado. "<p>";
+            echo $resultado;
+        } 
     }
-    catch (MongoDB\Driver\Exception\Exception $e) { 
-        $resultado = "<p>";
-        $resultado = $resultado. "Exception:". $e->getMessage() . "<br>"; 
-        $resultado = $resultado. "In file:". $e->getFile().  "<br>"; 
-        $resultado = $resultado. "On line:". $e->getLine(). "<br>"; 
-        $resultado = $resultado. "<p>";
-        echo $resultado;
-    } 
 ?>

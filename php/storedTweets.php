@@ -1,26 +1,38 @@
 <?php 
-    try { 
+    //Llamo al modelo mongodb
+    require_once '../modelo/MongoDB.php';
 
-        $manager = new MongoDB\Driver\Manager(); 
+    if( $_REQUEST['coleccion']){
 
-        $stats = new MongoDB\Driver\Command(["dbstats" => 1]);
-        // ejecutar el comando dbstats que devuelve información sobre la base de datos
-        $res = $manager->executeCommand("Twitter", $stats);
+        $coleccion = $_REQUEST['coleccion'];
+        $resultado = 0;
+        try { 
 
-        $stats = current($res->toArray());
-        echo $stats->objects;    
+            $mongo = new MongoDB();
+            $rows = $mongo->getStoredTweets($coleccion);
 
-        /*
-        print_r($stats);
-        stdClass Object ( [db] => Twitter [collections] => 1 [views] => 0 [objects] => 86 [avgObjSize] => 301.74418604651 [dataSize] => 25950 [storageSize] => 28672 [numExtents] => 0 [indexes] => 1 [indexSize] => 16384 [fsUsedSize] => 148396494848 [fsTotalSize] => 192268988416 [ok] => 1 ) 
-        */
+            /*$manager = new MongoDB\Driver\Manager(); 
+
+            $filtro = [];
+            $campos = ["projection" => ['_id' => 1]];
+            $query = new MongoDB\Driver\Query($filtro, $campos);
+            $rows = $manager->executeQuery("Twitter.".$coleccion, $query);
+            */
+            
+            foreach($rows as $row){
+                $resultado = $resultado + 1;
+            }
+
+            echo $resultado;
+
+        }
+        catch (MongoDB\Driver\Exception\Exception $e) { 
+            $resultado = "<p>";
+            $resultado = $resultado. "Exception:". $e->getMessage() . "<br>"; 
+            $resultado = $resultado. "In file:". $e->getFile().  "<br>"; 
+            $resultado = $resultado. "On line:". $e->getLine(). "<br>"; 
+            $resultado = $resultado. "<p>";
+            echo $resultado;
+        } 
     }
-    catch (MongoDB\Driver\Exception\Exception $e) { 
-        $resultado = "<p>";
-        $resultado = $resultado. "Exception:". $e->getMessage() . "<br>"; 
-        $resultado = $resultado. "In file:". $e->getFile().  "<br>"; 
-        $resultado = $resultado. "On line:". $e->getLine(). "<br>"; 
-        $resultado = $resultado. "<p>";
-        echo $resultado;
-    } 
 ?>

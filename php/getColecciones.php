@@ -1,20 +1,26 @@
 <?php 
+    //Llamo al modelo mongodb
+    require_once '../modelo/MongoDB.php';
+
     $resultado = "";
     try { 
+        $mongo = new MongoDB();
+        $colecciones = $mongo->getcolecciones();
 
-        http://php.net/manual/es/mongodb.getcollectionnames.php
-        $manager = new MongoDB\Driver\Manager(); 
+        /*$manager = new MongoDB\Driver\Manager(); 
 
-        $stats = new MongoDB\Driver\Command(['getCollectionNames' => 1]);
+        $stats = new MongoDB\Driver\Command(['listCollections' => 1]);
         // ejecutar el comando
         $colecciones = $manager->executeCommand("Twitter", $stats);
+        */
 
-        
-        for($colecciones as $nombreColeccion){
-            $resultado = $resultado. '<option value="' .$nombreColeccion. '>' .$nombreColeccion. '</option>';
+        $resultado = '<option value="0">Seleccione una colección...</option>';
+        foreach($colecciones as $coleccion){
+            $resultado = $resultado. '<option value="' .$coleccion->name. '">' .$coleccion->name. '</option>';
         }
 
         echo $resultado;
+        
     }
     catch (MongoDB\Driver\Exception\Exception $e) { 
         $resultado = "<p>";
